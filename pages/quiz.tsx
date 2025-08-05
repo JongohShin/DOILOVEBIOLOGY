@@ -19,9 +19,7 @@ export default function Quiz() {
 
   return (
     <main className="mx-auto max-w-2xl p-4">
-      <h2 className="mb-6 text-xl font-semibold">
-        문항을 읽고 1‒5점을 선택하세요
-      </h2>
+      <h2 className="mb-6 text-xl font-semibold">문항을 읽고 1‒5점을 선택하세요</h2>
 
       {QUESTIONS.map((q, idx) => (
         <div key={q.id} className="mb-6 rounded border p-4 shadow">
@@ -33,7 +31,8 @@ export default function Quiz() {
             {[1, 2, 3, 4, 5].map((n) => (
               <button
                 key={n}
-                onClick={() => handleSelect(idx, n)}
+                type="button"                  // ② submit 방지
+                onClick={() => handleSelect(idx, Number(n))}
                 className={`px-3 py-1 rounded border ${
                   answers[idx] === n
                     ? 'bg-emerald-500 text-white'
@@ -48,6 +47,7 @@ export default function Quiz() {
       ))}
 
       <button
+        type="button"
         onClick={handleSubmit}
         disabled={answers.some((v) => v === 0)}
         className="mt-4 w-full rounded bg-emerald-600 py-3 text-white hover:bg-emerald-700 disabled:opacity-50"
